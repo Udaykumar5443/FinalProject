@@ -1,0 +1,42 @@
+﻿
+
+@{
+    ViewBag.Title = "Dynamic Templates";
+}
+
+
+@model FinalProject.Models.User
+
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow-lg mt-5">
+            <div class="card-header bg-success text-white text-center">
+                <h4>Register</h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter Username" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Email" })
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Register</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

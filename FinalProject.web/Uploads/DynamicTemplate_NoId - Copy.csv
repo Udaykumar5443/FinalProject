@@ -1,0 +1,6 @@
+FileTemplateName,Domain,Category,SchoolYear,Roles,Statusid
+StudentData,Education,Enrollment,2024,Admin,1
+TeacherRecords,Education,Staffing,2024,Manager,1
+ExamResults,Education,Assessment,2023,Teacher,1
+LibraryBooks,Library,Resources,2024,Librarian,1
+FinanceReports,Finance,Budget,2023,Accountant,1

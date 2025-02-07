@@ -1,0 +1,35 @@
+﻿@model FinalProject.Models.DynamicTemplate
+@{
+    ViewBag.Title = "Add New Template Manually";
+}
+
+<h2>Add New Template Manually</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.FileTemplateName)
+    @Html.TextBoxFor(m => m.FileTemplateName)
+    <br />
+
+    @Html.LabelFor(m => m.Domain)
+    @Html.TextBoxFor(m => m.Domain)
+    <br />
+
+    @Html.LabelFor(m => m.Category)
+    @Html.TextBoxFor(m => m.Category)
+    <br />
+
+    @Html.LabelFor(m => m.SchoolYear)
+    @Html.TextBoxFor(m => m.SchoolYear)
+    <br />
+
+    @Html.LabelFor(m => m.Roles)
+    @Html.TextBoxFor(m => m.Roles)
+    <br />
+
+    @Html.LabelFor(m => m.StatusId)
+    @Html.TextBoxFor(m => m.StatusId)
+    <br />
+
+    <button type="submit">Add Template</button>
+}

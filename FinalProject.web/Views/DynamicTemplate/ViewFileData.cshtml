@@ -1,0 +1,32 @@
+﻿@model List<FinalProject.Models.DynamicTemplate>
+@{
+    ViewBag.Title = "View CSV Data";
+}
+
+<h2>CSV Data</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>File Template Name</th>
+            <th>Domain</th>
+            <th>Category</th>
+            <th>School Year</th>
+            <th>Roles</th>
+            <th>Status ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FileTemplateName</td>
+                <td>@item.Domain</td>
+                <td>@item.Category</td>
+                <td>@item.SchoolYear</td>
+                <td>@item.Roles</td>
+                <td>@item.StatusId</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,10 @@
+﻿@model FinalProject.Models.DynamicTemplate
+
+<h2>Template Details</h2>
+<p><strong>File Template Name:</strong> @Model.FileTemplateName</p>
+<p><strong>Domain:</strong> @Model.Domain</p>
+<p><strong>Category:</strong> @Model.Category</p>
+<p><strong>School Year:</strong> @Model.SchoolYear</p>
+<p><strong>Roles:</strong> @Model.Roles</p>
+
+<a href="@Url.Action("Index", "DynamicTemplate")">Back to List</a>

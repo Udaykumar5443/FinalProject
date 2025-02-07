@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Apply a modern font */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F4F7FC;
+        }
+
+        /* Sticky Navbar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: white;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+            .navbar-nav .nav-item .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+        /* Center the page heading */
+        .page-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            margin-top: 20px;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Stylish Table */
+        .table {
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .table thead {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f1f1f1;
+                transition: 0.3s;
+            }
+
+        /* Button Enhancements */
+        .btn {
+            transition: 0.3s ease-in-out;
+        }
+
+            .btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Toast Messages */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        /* Animations */
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "DynamicTemplate")">
+                <img src="http://10.10.1.218/Content/Images/analyticvue_logo.png" alt="Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    @if (Session["UserName"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-light" href="@Url.Action("Login", "Auth")">
+                                <i class="fa fa-sign-in-alt"></i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-light" href="@Url.Action("Register", "Auth")">
+                                <i class="fa fa-user-plus"></i> Register
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-danger" href="@Url.Action("Logout", "Auth")">
+                                <i class="fa fa-sign-out-alt"></i> Logout
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 80px;">
+        <h2 class="page-title">@ViewBag.Title</h2>
+        @RenderBody()
+    </div>
+
+    <!-- Toast Message -->
+    <div class="toast align-items-center text-white bg-success border-0" id="toastMessage" role="alert">
+        <div class="d-flex">
+            <div class="toast-body">
+                Action completed successfully!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Show Toast -->
+    <script>
+        function showToast(message) {
+            var toastElement = document.getElementById("toastMessage");
+            toastElement.querySelector(".toast-body").innerText = message;
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    </script>
+
+</body>
+</html>

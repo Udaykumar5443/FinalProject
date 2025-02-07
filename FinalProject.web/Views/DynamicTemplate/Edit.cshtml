@@ -1,0 +1,61 @@
+﻿@model FinalProject.Models.DynamicTemplate
+
+@{
+    ViewBag.Title = "Edit Template";
+}
+
+<h2 class="text-center mt-4" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Edit Template</h2>
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4 rounded">
+        <form id="editForm" method="post" action="@Url.Action("Edit", "DynamicTemplate")">
+            <input type="hidden" name="Id" value="@Model.Id" />
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">File Template Name:</label>
+                <input type="text" name="FileTemplateName" value="@Model.FileTemplateName" class="form-control shadow-sm" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Domain:</label>
+                <input type="text" name="Domain" value="@Model.Domain" class="form-control shadow-sm" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Category:</label>
+                <input type="text" name="Category" value="@Model.Category" class="form-control shadow-sm" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">School Year:</label>
+                <input type="text" name="SchoolYear" value="@Model.SchoolYear" class="form-control shadow-sm" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Roles:</label>
+                <input type="text" name="Roles" value="@Model.Roles" class="form-control shadow-sm" required />
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-success px-4 py-2" onclick="showSuccessAlert()">Save Changes</button>
+                <a href="@Url.Action("Index", "DynamicTemplate")" class="btn btn-secondary px-4 py-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function showSuccessAlert() {
+        Swal.fire({
+            icon: "success",
+            title: "Saved Successfully!",
+            text: "Changes have been updated.",
+            showConfirmButton: false,
+            timer: 2000
+        }).then(() => {
+            document.getElementById("editForm").submit(); // Submit form after SweetAlert closes
+        });
+    }
+</script>
