@@ -10,7 +10,7 @@ namespace FinalProject.DAL
 {
     public class DynamicTemplateRepository
     {
-        private readonly string _connectionString = "Data Source=.;database=EFDBFirstDatabase;Integrated Security=True";
+        private readonly string _connectionString = "Data Source=LAPTOP-IJUT692C\\SQLEXPRESS;database=practice;Integrated Security=True";
 
         // Get all templates
         public List<DynamicTemplate> GetAllTemplates()
@@ -40,34 +40,6 @@ namespace FinalProject.DAL
             return templates;
         }
 
-        //public List<DynamicTemplate> GetTemplates()
-        //{
-        //    string query = "SELECT * FROM DynamicTemplate WHERE StatusId = 1";
-        //    List<DynamicTemplate> templates = new List<DynamicTemplate>();
-
-        //    using (SqlConnection conn = new SqlConnection(_connectionString))
-        //    {
-        //        SqlCommand cmd = new SqlCommand(query, conn);
-        //        conn.Open();
-        //        SqlDataReader reader = cmd.ExecuteReader();
-
-        //        while (reader.Read())
-        //        {
-        //            templates.Add(new DynamicTemplate
-        //            {
-        //                Id = Convert.ToInt32(reader["Id"]),
-        //                FileTemplateName = reader["FileTemplateName"].ToString(),
-        //                Domain = reader["Domain"].ToString(),
-        //                Category = reader["Category"].ToString(),
-        //                SchoolYear = Convert.ToInt32(reader["SchoolYear"]),
-        //                Roles = reader["Roles"].ToString(),
-        //                StatusId = Convert.ToInt32(reader["StatusId"])
-        //            });
-        //        }
-        //    }
-        //    return templates;
-        //}
-
         public List<DynamicTemplate> GetTemplates()
         {
             List<DynamicTemplate> templates = new List<DynamicTemplate>();
@@ -96,7 +68,7 @@ namespace FinalProject.DAL
         }
 
 
-        // Add new template
+  
         public void AddTemplate(DynamicTemplate template)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
@@ -114,65 +86,12 @@ namespace FinalProject.DAL
                 cmd.Parameters.AddWithValue("@StatusId", template.StatusId);
 
                 cmd.ExecuteNonQuery();
+
+
             }
         }
 
-        public void SaveFileData(List<DynamicTemplate> templates)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-                foreach (var template in templates)
-                {
-                    string query = "INSERT INTO DynamicTemplate (FileTemplateName, Domain, Category, SchoolYear, Roles, StatusId) " +
-                                   "VALUES (@FileTemplateName, @Domain, @Category, @SchoolYear, @Roles, @StatusId)";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@FileTemplateName", template.FileTemplateName);
-                        cmd.Parameters.AddWithValue("@Domain", template.Domain);
-                        cmd.Parameters.AddWithValue("@Category", template.Category);
-                        cmd.Parameters.AddWithValue("@SchoolYear", template.SchoolYear);
-                        cmd.Parameters.AddWithValue("@Roles", template.Roles);
-                        cmd.Parameters.AddWithValue("@StatusId", template.StatusId);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-        }
-
-        public List<DynamicTemplate> GetFileData(int fileId)
-        {
-            List<DynamicTemplate> fileData = new List<DynamicTemplate>();
-
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-                string query = "SELECT * FROM DynamicTemplate WHERE Id = @FileId";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@FileId", fileId);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            fileData.Add(new DynamicTemplate
-                            {
-                                Id = reader.GetInt32(0),
-                                FileTemplateName = reader.GetString(1),
-                                Domain = reader.GetString(2),
-                                Category = reader.GetString(3),
-                                SchoolYear = Convert.ToInt32(reader["SchoolYear"]),
-                                Roles = reader.GetString(5),
-                                StatusId = reader.GetInt32(6)
-                            });
-                        }
-                    }
-                }
-            }
-            return fileData;
-        }
+      
         public void UpdateTemplate(DynamicTemplate template)
         {
             string query = "UPDATE DynamicTemplate SET FileTemplateName = @FileTemplateName, Domain = @Domain, " +
@@ -237,5 +156,25 @@ namespace FinalProject.DAL
             return template;
         }
 
+        public void CreateTable(string templateName, string[] headers)
+        {
+            StringBuilder createTableQuery = new StringBuilder($"CREATE TABLE [{templateName}] (Id INT IDENTITY(1,1) PRIMARY KEY, ");
+            foreach (var header in headers)
+            {
+                createTableQuery.Append($"[{header}] NVARCHAR(MAX), ");
+            }
+            createTableQuery.Length -= 2; // Remove last comma
+            createTableQuery.Append(");");
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(createTableQuery.ToString(), conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        
     }
 }

@@ -149,7 +149,6 @@
     <Content Include="Views\DynamicTemplate\Details.cshtml" />
     <Content Include="Views\DynamicTemplate\Edit.cshtml" />
     <Content Include="Views\DynamicTemplate\Index.cshtml" />
-    <Content Include="Views\DynamicTemplate\ViewFileData.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -173,6 +172,10 @@
     <ProjectReference Include="..\FinalProject.BLL\FinalProject.BLL.csproj">
       <Project>{845f0906-74d8-49bb-a42e-a33af357596b}</Project>
       <Name>FinalProject.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FinalProject.DAL\FinalProject.DAL.csproj">
+      <Project>{31cd6f3e-6f63-448e-a5de-1ef38a383678}</Project>
+      <Name>FinalProject.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\FinalProject.Models\FinalProject.Models.csproj">
       <Project>{b403a0fd-4945-409f-a83e-e38c95e3b111}</Project>

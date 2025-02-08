@@ -10,7 +10,7 @@ namespace FinalProject.DAL
 {
     public class UserDAL
     {
-        private readonly string _connectionString = "Data Source=.;database=EFDBFirstDatabase;Integrated Security=True";
+        private readonly string _connectionString = "Data Source=LAPTOP-IJUT692C\\SQLEXPRESS;database=practice;Integrated Security=True";
 
         public bool RegisterUser(User user)
         {
