@@ -47,7 +47,7 @@ namespace FinalProject.DAL
             {
                 conn.Open();
                 string query = "INSERT INTO DynamicTemplate (FileTemplateName, Domain, Category, SchoolYear, Roles, StatusId) " +
-                               "VALUES (@FileTemplateName, @Domain, @Category, @SchoolYear, @Roles, @StatusId)";
+                                "VALUES(@FileTemplateName, @Domain, @Category, @SchoolYear, @Roles, 1)";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@FileTemplateName", template.FileTemplateName);
@@ -55,7 +55,7 @@ namespace FinalProject.DAL
                 cmd.Parameters.AddWithValue("@Category", template.Category);
                 cmd.Parameters.AddWithValue("@SchoolYear", template.SchoolYear);
                 cmd.Parameters.AddWithValue("@Roles", template.Roles);
-                cmd.Parameters.AddWithValue("@StatusId", template.StatusId);
+               // cmd.Parameters.AddWithValue("@StatusId", template.StatusId);
 
                 cmd.ExecuteNonQuery();
 
