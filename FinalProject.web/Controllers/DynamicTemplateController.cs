@@ -122,6 +122,7 @@ namespace FinalProject.web.Controllers
                 //Store the manual user inputs in the database
 
                 ViewBag.Message = "Table Created Successfully!";
+
             }
             catch (Exception ex)
             {
