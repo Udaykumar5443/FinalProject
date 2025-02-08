@@ -84,7 +84,7 @@ namespace FinalProject.web.Controllers
 
         [HttpPost]
 
-        public ActionResult AddCsv(HttpPostedFileBase file, string templateName)
+        public ActionResult AddCsv(HttpPostedFileBase file, string templateName, string domain, string category, int schoolYear,string Roles, int statusId)
         {
             if (file == null || file.ContentLength == 0 || string.IsNullOrEmpty(templateName))
             {
@@ -122,6 +122,18 @@ namespace FinalProject.web.Controllers
                 //Store the manual user inputs in the database
 
                 ViewBag.Message = "Table Created Successfully!";
+
+                var template = new DynamicTemplate
+                {
+                    FileTemplateName = templateName,
+                    Domain = domain,
+                    Category = category,
+                    SchoolYear = schoolYear,
+                    Roles =Roles,
+                    StatusId = statusId
+                };
+
+                return AddManual(template);
 
             }
             catch (Exception ex)

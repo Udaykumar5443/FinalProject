@@ -40,35 +40,7 @@ namespace FinalProject.DAL
             return templates;
         }
 
-        public List<DynamicTemplate> GetTemplates()
-        {
-            List<DynamicTemplate> templates = new List<DynamicTemplate>();
-
-            using (SqlConnection con = new SqlConnection(_connectionString))
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM DynamicTemplate WHERE StatusId = 1", con); // Fetch only active records
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    templates.Add(new DynamicTemplate
-                    {
-                        Id = Convert.ToInt32(reader["Id"]),
-                        FileTemplateName = reader["FileTemplateName"].ToString(),
-                        Domain = reader["Domain"].ToString(),
-                        Category = reader["Category"].ToString(),
-                        SchoolYear = Convert.ToInt32(reader["SchoolYear"]),
-                        Roles = reader["Roles"].ToString(),
-                        StatusId = Convert.ToInt32(reader["StatusId"])
-                    });
-                }
-            }
-            return templates;
-        }
-
-
-  
+      
         public void AddTemplate(DynamicTemplate template)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
